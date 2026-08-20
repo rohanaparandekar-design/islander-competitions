@@ -298,16 +298,13 @@ function item(d){
     <div class="sect"><h3>Full timeline</h3><p>${esc(d.full_timeline)}</p></div>
     ${d.notes?`<div class="sect"><h3>Watch out for</h3><p class="warn">${esc(d.notes)}</p></div>`:""}
     <dl class="facts">
-      <div class="fact"><dt>Deadline</dt><dd>${esc(d.deadline_date||"Rolling")}</dd></div>
-      <div class="fact"><dt>Deadline type</dt><dd>${esc(d.deadline_type)}</dd></div>
-      <div class="fact"><dt>Team or individual</dt><dd>${esc(d.team_or_individual)}${d.team_size_max?" ("+esc(d.team_size_min)+"&ndash;"+esc(d.team_size_max)+")":""}</dd></div>
+      <div class="fact"><dt>Team or individual</dt><dd>${esc(d.team_or_individual)}${(d.team_size_max&&d.team_size_min!==d.team_size_max)?" ("+esc(d.team_size_min)+"&ndash;"+esc(d.team_size_max)+")":""}</dd></div>
       <div class="fact"><dt>Grades</dt><dd>${esc(d.grade_min)}&ndash;${esc(d.grade_max)}</dd></div>
       <div class="fact"><dt>Cost</dt><dd>${esc(d.cost_detail)}</dd></div>
-      <div class="fact"><dt>Advisor required</dt><dd>${d.advisor_required==="TRUE"?"Yes":"No"}</dd></div>
+      ${d.advisor_required==="TRUE"?`<div class="fact"><dt>Advisor required</dt><dd>Yes</dd></div>`:""}
       <div class="fact"><dt>Who registers</dt><dd>${esc(d.registration_owner)}</dd></div>
       <div class="fact"><dt>Time commitment</dt><dd>${esc(d.time_commitment)}</dd></div>
-      <div class="fact"><dt>Verification</dt><dd>${esc(d.verification_status)}</dd></div>
-      <div class="fact"><dt>Last checked</dt><dd>${esc(d.last_checked||"Never")}</dd></div>
+      ${d.last_checked?`<div class="fact"><dt>Last checked</dt><dd>${esc(d.last_checked)}</dd></div>`:""}
     </dl>
     <div class="official">
       <p class="official-label">Official site: <b>${esc(d.source_url)}</b></p>
