@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Student Competition Resources 2026-2027</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --maroon:#693235; --maroon-lt:#8A4B4E; --ink:#000000; --soft:#000000;
+  --rule:var(--maroon); --rule-dk:var(--maroon); --bg:#FFFFFF; --wash:#FAF9F8;
+  --now:#B3271A; --soon:#9A6B12; --later:#3F6B54;
+  --font-title:"Palatino Linotype","Palatino","Book Antiqua",Georgia,serif;
+  --font-body:"Brandon Grotesque","Poppins","Inter",system-ui,-apple-system,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:var(--font-body);font-weight:400;font-size:15px;line-height:1.7;
+  -webkit-font-smoothing:antialiased}
+a{color:#000;text-decoration:underline;text-underline-offset:3px}
+a:hover{color:#000;text-decoration-thickness:2px}
+:focus-visible{outline:2px solid var(--maroon);outline-offset:3px}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+img{max-width:100%;display:block}
+.shell{max-width:1120px;margin:0 auto;padding:0 30px}
+
+.util{border-bottom:1px solid var(--rule)}
+.util .shell{display:flex;align-items:center;justify-content:space-between;height:52px;gap:20px}
+.util-left{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:#000;font-weight:500}
+.search{position:relative;flex:0 1 240px}
+.search input{width:100%;border:0;border-bottom:1px solid var(--rule);background:none;
+  padding:5px 0 5px 20px;font:inherit;font-size:12.5px;letter-spacing:.05em;color:var(--ink)}
+.search input::placeholder{color:#000;opacity:.45;letter-spacing:.12em;font-size:10.5px;text-transform:uppercase}
+.search input:focus{border-bottom-color:var(--maroon);outline:0}
+.search svg{position:absolute;left:0;top:9px;width:13px;height:13px;stroke:#000;fill:none;stroke-width:1.5}
+
+.masthead{text-align:center;padding:54px 0 46px}
+.wordmark{font-size:clamp(26px,5vw,40px);font-weight:300;letter-spacing:.42em;
+  text-transform:uppercase;margin:0 0 0 .42em;color:var(--ink);line-height:1.1}
+.tagline{margin:16px 0 0;font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;color:#000}
+
+nav{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);position:sticky;top:0;
+  background:var(--bg);z-index:30}
+.navrow{display:flex;justify-content:center;flex-wrap:wrap}
+.navrow button{padding:19px 17px;font-size:11px;letter-spacing:.19em;text-transform:uppercase;
+  color:var(--ink);position:relative;font-weight:400;transition:color .18s}
+.navrow button:hover{color:#000;font-weight:600}
+.navrow button[aria-current=true]{color:#000;font-weight:600}
+.navrow button[aria-current=true]::after{content:"";position:absolute;left:17px;right:17px;bottom:-1px;
+  height:2px;background:var(--maroon)}
+
+.layout{display:grid;grid-template-columns:1fr 268px;gap:60px;padding:52px 0 0;align-items:start}
+aside{position:sticky;top:80px}
+
+.eyebrow{text-align:center;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+  color:#000;margin:0 0 14px}
+.eyebrow em{font-style:normal;font-weight:600}
+.eyebrow .sep{padding:0 9px;color:#000;opacity:.35}
+h1{font-family:var(--font-title);font-weight:500;
+  font-size:clamp(31px,4.6vw,46px);line-height:1.18;text-align:center;margin:0 0 22px;letter-spacing:.005em}
+h1.pagehead{font-weight:700}
+.intro{max-width:64ch;margin:0 auto 44px;text-align:center;color:#000;font-size:15.5px}
+
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));gap:22px}
+.ccard{border:1px solid var(--maroon);padding:30px 24px 26px;text-align:left;
+  transition:border-color .2s,transform .2s;display:flex;flex-direction:column;min-height:196px;background:var(--bg)}
+.ccard:hover{border-color:var(--maroon-lt);transform:translateY(-3px)}
+.ccard .num{font-family:var(--font-title);font-size:40px;line-height:1;color:#000;font-weight:500}
+.ccard .cname{font-family:var(--font-title);font-size:22px;line-height:1.25;margin:12px 0 10px;font-weight:700}
+.ccard .cmeta{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#000;font-weight:500;margin-top:auto}
+.ccard .cnext{font-size:12.5px;color:#000;margin:0 0 14px}
+
+.crumb{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:#000;
+  margin:0 0 26px;text-align:center}
+.crumb button{font:inherit;letter-spacing:.18em;text-transform:uppercase;color:#000;
+  text-decoration:underline;text-underline-offset:3px}
+.rows{border-top:1px solid var(--rule)}
+.row{width:100%;text-align:left;display:grid;grid-template-columns:78px 1fr;gap:0 22px;
+  padding:22px 6px 22px 14px;border-bottom:1px solid var(--rule);border-left:3px solid transparent;
+  align-items:start;transition:background .18s}
+.row:hover{background:var(--wash)}
+.dnum{font-family:var(--font-title);font-size:26px;line-height:1.1;font-weight:500}
+.dstamp{font-size:9.5px;letter-spacing:.1em;color:#000;text-transform:uppercase;margin-top:3px}
+.dnum{color:#000}
+.row.s-now{border-left-color:var(--now)} .row.s-soon{border-left-color:var(--soon)}
+.row.s-later{border-left-color:var(--later)} .s-none .dnum{font-size:17px}
+.rtitle{font-family:var(--font-title);font-size:23px;line-height:1.28;margin:0 0 7px;font-weight:500}
+.rwhen{font-size:13px;color:#000;margin:0 0 10px}
+.pills{display:flex;flex-wrap:wrap;gap:6px}
+.pill{font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;padding:3.5px 9px;
+  border:1px solid var(--rule-dk);color:#000;white-space:nowrap;display:inline-block}
+.pill.cat{border-color:var(--maroon)}
+.pill.gate{border-color:var(--now);font-weight:600}
+.pill.free{border-color:var(--later)}
+
+.detail h1{text-align:left;margin-bottom:16px}
+.detail .eyebrow{text-align:left}
+.dhead{border-bottom:1px solid var(--rule);padding-bottom:26px}
+.dhead .pills{margin-top:18px}
+.spans{margin:22px 0 0;font-size:12.5px;color:#000}
+.spans b{font-size:10.5px;letter-spacing:.17em;text-transform:uppercase;color:#000;
+  display:block;margin-bottom:9px;font-weight:600}
+.sect{padding:28px 0;border-bottom:1px solid var(--rule)}
+.sect h3{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:#000;
+  margin:0 0 11px;font-weight:600}
+.sect p{margin:0;font-size:15.5px;color:#000}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:26px 30px;
+  padding:30px 0;border-bottom:1px solid var(--rule);margin:0}
+.fact dt{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:#000;font-weight:600;margin-bottom:5px}
+.fact dd{margin:0;font-size:14px;color:#000}
+.warn{border-left:2px solid var(--maroon);padding-left:16px}
+.official{margin:30px 0 0}
+.official-label{margin:0 0 14px;font-size:13px;color:#000;word-break:break-all}
+.official-label b{font-weight:700}
+.official-btn{display:inline-block;border:1px solid var(--maroon);color:var(--maroon);
+  padding:12px 26px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;
+  text-decoration:none;transition:background .18s,color .18s}
+.official-btn:hover{background:var(--maroon);color:#fff}
+
+.side{text-align:center;margin-bottom:44px}
+.side-h{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:#000;font-weight:600;
+  padding-bottom:11px;border-bottom:1px solid var(--rule);margin:0 0 22px}
+.logo{width:112px;margin:0 auto 18px}
+.side p{font-size:13px;line-height:1.8;color:#000;margin:0}
+.soonlist{list-style:none;margin:0;padding:0;text-align:left}
+.soonlist li{border-bottom:1px solid var(--rule);padding:12px 0}
+.soonlist button{display:block;width:100%;text-align:left}
+.soonlist .d{font-size:9.5px;letter-spacing:.11em;text-transform:uppercase;color:#000;font-weight:600;display:block}
+.soonlist .n{font-family:var(--font-title);font-size:16.5px;line-height:1.3;color:#000;display:block}
+.soonlist button:hover .n{text-decoration:underline;text-underline-offset:3px}
+.side-note{text-align:left;font-size:12px;line-height:1.8;color:#000}
+
+.empty{padding:70px 0;text-align:center;color:#000}
+footer{margin-top:80px;border-top:1px solid var(--rule);padding:34px 0 60px;text-align:center;
+  font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:#000;line-height:2.2}
+
+@media (max-width:900px){
+  .layout{grid-template-columns:1fr;gap:56px}
+  aside{position:static;border-top:1px solid var(--rule);padding-top:40px}
+  .navrow button{padding:14px 11px;font-size:10px;letter-spacing:.14em}
+}
+@media (max-width:560px){
+  .shell{padding:0 20px}
+  .row{grid-template-columns:60px 1fr;gap:0 15px}
+  .cards{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="util"><div class="shell">
+  <span class="util-left">2026&ndash;2027 Academic Year</span>
+  <div class="search">
+    <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="7"/><path d="M16 16l5 5"/></svg>
+    <input type="search" id="q" placeholder="Search" aria-label="Search competitions">
+  </div>
+</div></div>
+
+<div class="shell">
+  <div class="masthead">
+    <h2 class="wordmark">Opportunity Atlas</h2>
+    <p class="tagline">Academic Competition Resources</p>
+  </div>
+</div>
+
+<nav><div class="shell"><div class="navrow" id="nav"></div></div></nav>
+
+<div class="shell">
+  <div class="layout">
+    <main id="main"></main>
+    <aside>
+      <div class="side">
+        <p class="side-h">About</p>
+        <img class="logo" src="data:image/png;base64,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" alt="Opportunity Atlas logo">
+        <p>Every academic competition we can find, in one place, sorted by what closes first. Built by students, for students.</p>
+      </div>
+      <div class="side">
+        <p class="side-h">Closing Soon</p>
+        <ul class="soonlist" id="soon"></ul>
+      </div>
+      <div class="side">
+        <p class="side-h">Before You Plan</p>
+        <p class="side-note">Dates here were compiled from research, not confirmed with the organizers. Open the source link on any competition before you build a schedule around it.</p>
+      </div>
+    </aside>
+  </div>
+  <footer>
+    Student Competition Resources &nbsp;&middot;&nbsp; 2026&ndash;2027 &nbsp;&middot;&nbsp; 40 Competitions On File
+  </footer>
+</div>
+
+<script src="data.js"></script>
+<script>
+const TODAY = new Date("2026-08-19T00:00:00"), MS = 86400000;
+DATA.forEach((d,i)=>{
+  d.i=i;
+  d.days = d.deadline_date ? Math.round((new Date(d.deadline_date+"T00:00:00")-TODAY)/MS) : null;
+  d.state = d.days===null?"none":d.days<=30?"now":d.days<=90?"soon":"later";
+  d.spans = [...new Set([d.category, ...(d.tags||"").split("|")])].filter(Boolean);
+  d.hay = [d.name,d.category,d.tags,d.what_it_is,d.what_you_need_to_do,d.notes].join(" ").toLowerCase();
+});
+const CATS=[...new Set(DATA.map(d=>d.category))].sort();
+const BLURB={
+ "STEM & Research":"Science fairs, olympiad exams, research proposals, and journals that publish high school work.",
+ "Business & Entrepreneurship":"Startup pitches, business plans, and the chapter-based organizations behind them.",
+ "Finance & Economics":"Investment simulations, stock pitches, monetary policy, and economics essays.",
+ "Math & Computer Science":"Exam ladders, competitive programming, cybersecurity, modeling, and statistics.",
+ "Writing & Humanities":"Essay competitions judged on argument, evidence, and prose.",
+ "Civics & Policy":"Constitutional essays, mock trial, oratory, and scholarships for public service."
+};
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let view={type:"home"}, query="";
+
+$("#nav").innerHTML = `<button data-go="home">Home</button>`
+  + CATS.map(c=>`<button data-cat="${esc(c)}">${esc(c)}</button>`).join("")
+  + `<button data-go="all">All ${DATA.length}</button>`;
+$("#nav").addEventListener("click",e=>{
+  const b=e.target.closest("button"); if(!b) return;
+  view = b.dataset.cat ? {type:"cat",cat:b.dataset.cat} : {type:b.dataset.go};
+  go();
+});
+
+$("#soon").innerHTML = DATA.filter(d=>d.days!==null&&d.days>=0).sort((a,b)=>a.days-b.days).slice(0,5)
+  .map(d=>`<li><button data-open="${d.i}">
+      <span class="d">${d.days} days &middot; ${esc(d.deadline_date)}</span>
+      <span class="n">${esc(d.name)}</span></button></li>`).join("");
+
+$("#q").addEventListener("input",e=>{
+  query=e.target.value.trim().toLowerCase();
+  view = query ? {type:"search"} : {type:"home"};
+  render();
+});
+
+function go(){ window.scrollTo({top:0,behavior:"smooth"}); render(); }
+function dcell(d){
+  const t = d.days===null?"Rolling":d.days<0?"Closed":d.days;
+  const sub = d.days===null?"no fixed date":d.days<0?"passed":"days left";
+  return `<div><div class="dnum">${t}</div><div class="dstamp">${esc(sub)}</div></div>`;
+}
+function pills(d){
+  const out=[];
+  if(d.registration_owner!=="Student") out.push(`<span class="pill gate">${esc(d.registration_owner)} registers</span>`);
+  out.push(`<span class="pill">${d.team_or_individual==="Individual"?"Solo only":d.team_or_individual==="Team"?"Team required":"Solo or team"}</span>`);
+  if(d.cost_tier) out.push(`<span class="pill ${d.cost_tier==="Free"?"free":""}">${esc(d.cost_tier)}</span>`);
+  out.push(`<span class="pill">Grades ${esc(d.grade_min)}&ndash;${esc(d.grade_max)}</span>`);
+  return out.join("");
+}
+function row(d){
+  return `<button class="row s-${d.state}" data-open="${d.i}">
+    ${dcell(d)}
+    <div>
+      <h2 class="rtitle">${esc(d.name)}</h2>
+      <p class="rwhen">${esc(d.deadline_display)}</p>
+      <div class="pills"><span class="pill cat">${esc(d.category)}</span>${pills(d)}</div>
+    </div></button>`;
+}
+function listing(title,eyebrow,items){
+  return `<p class="eyebrow">${eyebrow}</p><h1>${title}</h1>`
+    + (items.length?`<div class="rows">${items.map(row).join("")}</div>`
+      :`<div class="empty">Nothing matches that. Try another word.</div>`);
+}
+function home(){
+  const cards = CATS.map(c=>{
+    const set=DATA.filter(d=>d.category===c);
+    const nxt=set.filter(d=>d.days!==null&&d.days>=0).sort((a,b)=>a.days-b.days)[0];
+    return `<button class="ccard" data-cat="${esc(c)}">
+      <span class="num">${set.length}</span>
+      <h3 class="cname">${esc(c)}</h3>
+      <p class="cnext">${esc(BLURB[c]||"")}</p>
+      <span class="cmeta">${nxt?`Next closes in ${nxt.days} days`:"No dated deadlines"}</span>
+    </button>`;
+  }).join("");
+  const urgent=DATA.filter(d=>d.days!==null&&d.days>=0&&d.days<=90).length;
+  return `<p class="eyebrow">August 19, 2026 <span class="sep">/</span> <em>${DATA.length} competitions</em>
+      <span class="sep">/</span> ${urgent} closing within 90 days</p>
+    <h1 class="pagehead">Student Competition Resources 2026&ndash;2027</h1>
+    <p class="intro">Pick a category to see everything inside it, or use the menu above. Each competition lists what it is, what you have to do, when it closes, what it costs, and who has to register you.</p>
+    <div class="cards">${cards}</div>`;
+}
+function item(d){
+  return `<article class="detail">
+    <p class="eyebrow"><em>${esc(d.category)}</em><span class="sep">/</span>${esc(d.deadline_type||"Deadline")}
+      <span class="sep">/</span>${d.days===null?"Rolling":d.days+" days left"}</p>
+    <div class="dhead">
+      <h1>${esc(d.name)}</h1>
+      ${d.start_by_date?`<p class="rwhen">Start by: ${esc(d.start_by_date)}</p>`:""}
+      <p class="rwhen">${esc(d.deadline_display)}</p>
+      <div class="pills">${pills(d)}<span class="pill">${esc(d.verification_status)}</span></div>
+      <div class="spans"><b>Spans these areas</b>
+        ${d.spans.map(s=>`<span class="pill cat">${esc(s)}</span>`).join(" ")}</div>
+    </div>
+    <div class="sect"><h3>What it is</h3><p>${esc(d.what_it_is)}</p></div>
+    <div class="sect"><h3>What you need to do</h3><p>${esc(d.what_you_need_to_do)}</p></div>
+    <div class="sect"><h3>Full timeline</h3><p>${esc(d.full_timeline)}</p></div>
+    ${d.notes?`<div class="sect"><h3>Watch out for</h3><p class="warn">${esc(d.notes)}</p></div>`:""}
+    <dl class="facts">
+      <div class="fact"><dt>Deadline</dt><dd>${esc(d.deadline_date||"Rolling")}</dd></div>
+      <div class="fact"><dt>Deadline type</dt><dd>${esc(d.deadline_type)}</dd></div>
+      <div class="fact"><dt>Team or individual</dt><dd>${esc(d.team_or_individual)}${d.team_size_max?" ("+esc(d.team_size_min)+"&ndash;"+esc(d.team_size_max)+")":""}</dd></div>
+      <div class="fact"><dt>Grades</dt><dd>${esc(d.grade_min)}&ndash;${esc(d.grade_max)}</dd></div>
+      <div class="fact"><dt>Cost</dt><dd>${esc(d.cost_detail)}</dd></div>
+      <div class="fact"><dt>Advisor required</dt><dd>${d.advisor_required==="TRUE"?"Yes":"No"}</dd></div>
+      <div class="fact"><dt>Who registers</dt><dd>${esc(d.registration_owner)}</dd></div>
+      <div class="fact"><dt>Time commitment</dt><dd>${esc(d.time_commitment)}</dd></div>
+      <div class="fact"><dt>Verification</dt><dd>${esc(d.verification_status)}</dd></div>
+      <div class="fact"><dt>Last checked</dt><dd>${esc(d.last_checked||"Never")}</dd></div>
+    </dl>
+    <div class="official">
+      <p class="official-label">Official site: <b>${esc(d.source_url)}</b></p>
+      <a class="official-btn" href="${esc(d.source_url)}" target="_blank" rel="noopener">Click here for the official site &rarr;</a>
+    </div>
+    <p class="crumb" style="margin-top:44px"><button data-go2="home">&larr; Back to all categories</button></p>
+  </article>`;
+}
+function byDeadline(a,b){ if(a.days===null)return 1; if(b.days===null)return -1; return a.days-b.days; }
+
+function render(){
+  document.querySelectorAll("#nav button").forEach(b=>{
+    const on = (view.type==="cat"&&b.dataset.cat===view.cat)
+            || (view.type==="home"&&b.dataset.go==="home")
+            || (view.type==="all"&&b.dataset.go==="all");
+    b.setAttribute("aria-current",on?"true":"false");
+  });
+  let html;
+  if(view.type==="item") html=item(DATA[view.i]);
+  else if(view.type==="cat"){
+    const set=DATA.filter(d=>d.category===view.cat).sort(byDeadline);
+    html=`<p class="crumb"><button data-go2="home">All categories</button> &nbsp;/&nbsp; ${esc(view.cat)}</p>`
+       + listing(esc(view.cat), `${set.length} competitions <span class="sep">/</span> sorted by what closes first`, set);
+  }
+  else if(view.type==="all"){
+    const set=[...DATA].sort(byDeadline);
+    html=listing("Every competition", `${set.length} on file <span class="sep">/</span> sorted by what closes first`, set);
+  }
+  else if(view.type==="search"){
+    const set=DATA.filter(d=>d.hay.includes(query)).sort(byDeadline);
+    html=listing("Search results", `${set.length} match${set.length===1?"":"es"} for &ldquo;${esc(query)}&rdquo;`, set);
+  }
+  else html=home();
+  $("#main").innerHTML=html;
+}
+
+document.addEventListener("click",e=>{
+  const o=e.target.closest("[data-open]");
+  if(o){ view={type:"item",i:+o.dataset.open}; go(); return; }
+  const c=e.target.closest(".ccard");
+  if(c){ view={type:"cat",cat:c.dataset.cat}; go(); return; }
+  const g=e.target.closest("[data-go2]");
+  if(g){ view={type:g.dataset.go2}; go(); }
+});
+
+render();
+</script>
+</body>
+</html>
