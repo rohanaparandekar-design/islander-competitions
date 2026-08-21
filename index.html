@@ -63,6 +63,11 @@ h1{font-family:var(--font-title);font-weight:500;
 h1.pagehead{font-weight:700}
 .intro{max-width:64ch;margin:0 auto 44px;text-align:center;color:var(--ink);font-size:15.5px}
 
+.callout{max-width:64ch;margin:0 auto 34px;padding:14px 22px;border-left:2px solid var(--maroon);
+  background:var(--wash);text-align:left;font-size:13.5px;color:var(--ink);line-height:1.7}
+.callout-link{font:inherit;color:var(--maroon);font-weight:600;text-decoration:underline;
+  text-underline-offset:2px;background:none;border:0;padding:0;cursor:pointer}
+
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));gap:22px}
 .ccard{border:1px solid var(--maroon);padding:30px 24px 26px;text-align:left;
   transition:border-color .2s,transform .2s;display:flex;flex-direction:column;min-height:196px;background:var(--bg)}
@@ -76,6 +81,17 @@ h1.pagehead{font-weight:700}
   margin:0 0 26px;text-align:center}
 .crumb button{font:inherit;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);
   text-decoration:underline;text-underline-offset:3px}
+.filters{display:flex;flex-wrap:wrap;align-items:end;gap:16px 24px;margin:0 0 18px;
+  padding-bottom:18px;border-bottom:1px solid var(--rule)}
+.fgroup{display:flex;flex-direction:column;gap:5px}
+.fgroup label{font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);font-weight:600}
+.fgroup select{font:inherit;font-size:12.5px;color:var(--ink);border:1px solid var(--rule);
+  background:var(--bg);padding:7px 10px}
+.fgroup select:focus-visible{outline:2px solid var(--maroon);outline-offset:2px}
+.filter-clear{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--maroon);
+  text-decoration:underline;text-underline-offset:3px;padding-bottom:8px}
+.filter-count{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);
+  opacity:.65;margin:0 0 18px}
 .rows{border-top:1px solid var(--rule)}
 .row{width:100%;text-align:left;display:grid;grid-template-columns:78px 1fr;gap:0 22px;
   padding:22px 6px 22px 14px;border-bottom:1px solid var(--rule);border-left:3px solid transparent;
@@ -118,6 +134,10 @@ h1.pagehead{font-weight:700}
   padding:12px 26px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;
   text-decoration:none;transition:background .18s,color .18s}
 .official-btn:hover{background:var(--maroon);color:#fff}
+.cta-btn{display:inline-block;background:var(--maroon);border:1px solid var(--maroon);color:#fff;
+  padding:14px 30px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;
+  text-decoration:none;margin:22px 0 0;transition:background .18s,border-color .18s}
+.cta-btn:hover{background:var(--maroon-lt);border-color:var(--maroon-lt);color:#fff}
 
 .side{text-align:center;margin-bottom:44px}
 .side-h{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink);font-weight:600;
@@ -215,6 +235,27 @@ const BLURB={
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 let view={type:"home"}, query="";
+let filters={cost:"all",team:"all",who:"all"};
+function passesFilters(d){
+  if(filters.cost==="free"&&d.cost_tier!=="Free") return false;
+  if(filters.team==="alone"&&d.team_or_individual!=="Individual"&&d.team_or_individual!=="Both") return false;
+  if(filters.team==="team"&&d.team_or_individual!=="Team") return false;
+  if(filters.who==="self"&&d.registration_owner!=="Student") return false;
+  if(filters.who==="other"&&d.registration_owner!=="Teacher"&&d.registration_owner!=="School") return false;
+  return true;
+}
+function filterStrip(){
+  const opt=(group,val,label)=>`<option value="${val}"${filters[group]===val?" selected":""}>${esc(label)}</option>`;
+  return `<div class="filters">
+    <div class="fgroup"><label for="f-cost">Cost</label>
+      <select id="f-cost" data-filter="cost">${opt("cost","all","All")}${opt("cost","free","Free only")}</select></div>
+    <div class="fgroup"><label for="f-team">Team</label>
+      <select id="f-team" data-filter="team">${opt("team","all","All")}${opt("team","alone","I can enter alone")}${opt("team","team","Team required")}</select></div>
+    <div class="fgroup"><label for="f-who">Who registers</label>
+      <select id="f-who" data-filter="who">${opt("who","all","All")}${opt("who","self","I can register myself")}${opt("who","other","Needs a teacher or school")}</select></div>
+    <button type="button" class="filter-clear" data-clear>Clear filters</button>
+  </div>`;
+}
 
 $("#nav").innerHTML = `<button data-go="home">Home</button>`
   + CATS.map(c=>`<button data-cat="${esc(c)}">${esc(c)}</button>`).join("")
@@ -259,10 +300,14 @@ function row(d){
       <div class="pills"><span class="pill cat">${esc(d.category)}</span>${pills(d)}</div>
     </div></button>`;
 }
-function listing(title,eyebrow,items){
-  return `<p class="eyebrow">${eyebrow}</p><h1>${title}</h1>`
-    + (items.length?`<div class="rows">${items.map(row).join("")}</div>`
-      :`<div class="empty">Nothing matches that. Try another word.</div>`);
+function listing(title,eyebrow,items,filterable){
+  const shown = filterable ? items.filter(passesFilters) : items;
+  const strip = filterable ? filterStrip()+`<p class="filter-count">Showing ${shown.length} of ${items.length}</p>` : "";
+  let body;
+  if(shown.length) body=`<div class="rows">${shown.map(row).join("")}</div>`;
+  else if(filterable&&items.length) body=`<div class="empty">No competitions match these filters &mdash; clear one to see more.</div>`;
+  else body=`<div class="empty">Nothing matches that. Try another word.</div>`;
+  return `<p class="eyebrow">${eyebrow}</p><h1>${title}</h1>` + strip + body;
 }
 function home(){
   const cards = CATS.map(c=>{
@@ -277,10 +322,18 @@ function home(){
   }).join("");
   const urgent=DATA.filter(d=>d.days!==null&&d.days>=0&&d.days<=90).length;
   const todayStr=TODAY.toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
+  const beginnerRec=DATA.find(d=>d.name==="New York Times Student Contests");
+  const beginnerClose=beginnerRec&&beginnerRec.deadline_date
+    ?new Date(beginnerRec.deadline_date+"T00:00:00").toLocaleDateString("en-US",{month:"short",day:"numeric"})
+    :null;
+  const callout=beginnerRec?`<p class="callout">New to competitions? Start with the
+      <button class="callout-link" data-open="${beginnerRec.i}">NYT Tiny Memoir</button>
+      &mdash; 100 words, free, no teacher needed.${beginnerClose?` Closes ${esc(beginnerClose)}.`:""}</p>`:"";
   return `<p class="eyebrow">${esc(todayStr)} <span class="sep">/</span> <em>${DATA.length} competitions</em>
       <span class="sep">/</span> ${urgent} closing within 90 days</p>
     <h1 class="pagehead">Student Competition Resources 2026&ndash;2027</h1>
     <p class="intro">Pick a category to see everything inside it, or use the menu above. Each competition lists what it is, what you have to do, when it closes, what it costs, and who has to register you.</p>
+    ${callout}
     <div class="cards">${cards}</div>`;
 }
 function item(d){
@@ -291,6 +344,7 @@ function item(d){
       <h1>${esc(d.name)}</h1>
       ${d.start_by_date?`<p class="rwhen">Start by: ${esc(d.start_by_date)}</p>`:""}
       <p class="rwhen">${esc(d.deadline_display)}</p>
+      <a class="cta-btn" href="${esc(d.source_url)}" target="_blank" rel="noopener">Go to the official site &rarr;</a>
       <div class="pills">${pills(d)}</div>
       <div class="spans"><b>Spans these areas</b>
         ${d.spans.map(s=>`<span class="pill cat">${esc(s)}</span>`).join(" ")}</div>
@@ -329,15 +383,15 @@ function render(){
   else if(view.type==="cat"){
     const set=DATA.filter(d=>d.category===view.cat).sort(byDeadline);
     html=`<p class="crumb"><button data-go2="home">All categories</button> &nbsp;/&nbsp; ${esc(view.cat)}</p>`
-       + listing(esc(view.cat), `${set.length} competitions <span class="sep">/</span> sorted by what closes first`, set);
+       + listing(esc(view.cat), `${set.length} competitions <span class="sep">/</span> sorted by what closes first`, set, true);
   }
   else if(view.type==="all"){
     const set=[...DATA].sort(byDeadline);
-    html=listing("Every competition", `${set.length} on file <span class="sep">/</span> sorted by what closes first`, set);
+    html=listing("Every competition", `${set.length} on file <span class="sep">/</span> sorted by what closes first`, set, true);
   }
   else if(view.type==="search"){
     const set=DATA.filter(d=>d.hay.includes(query)).sort(byDeadline);
-    html=listing("Search results", `${set.length} match${set.length===1?"":"es"} for &ldquo;${esc(query)}&rdquo;`, set);
+    html=listing("Search results", `${set.length} match${set.length===1?"":"es"} for &ldquo;${esc(query)}&rdquo;`, set, false);
   }
   else html=home();
   $("#main").innerHTML=html;
@@ -349,7 +403,13 @@ document.addEventListener("click",e=>{
   const c=e.target.closest(".ccard");
   if(c){ view={type:"cat",cat:c.dataset.cat}; go(); return; }
   const g=e.target.closest("[data-go2]");
-  if(g){ view={type:g.dataset.go2}; go(); }
+  if(g){ view={type:g.dataset.go2}; go(); return; }
+  const cl=e.target.closest("[data-clear]");
+  if(cl){ filters={cost:"all",team:"all",who:"all"}; render(); }
+});
+document.addEventListener("change",e=>{
+  const s=e.target.closest("select[data-filter]");
+  if(s){ filters[s.dataset.filter]=s.value; render(); }
 });
 
 render();
