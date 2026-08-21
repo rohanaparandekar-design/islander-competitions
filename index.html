@@ -291,14 +291,14 @@ function item(d){
       <h1>${esc(d.name)}</h1>
       ${d.start_by_date?`<p class="rwhen">Start by: ${esc(d.start_by_date)}</p>`:""}
       <p class="rwhen">${esc(d.deadline_display)}</p>
-      <div class="pills">${pills(d)}<span class="pill">${esc(d.verification_status)}</span></div>
+      <div class="pills">${pills(d)}</div>
       <div class="spans"><b>Spans these areas</b>
         ${d.spans.map(s=>`<span class="pill cat">${esc(s)}</span>`).join(" ")}</div>
     </div>
     <div class="sect"><h3>What it is</h3><p>${esc(d.what_it_is)}</p></div>
     <div class="sect"><h3>What you need to do</h3><p>${esc(d.what_you_need_to_do)}</p></div>
     <div class="sect"><h3>Full timeline</h3><p>${esc(d.full_timeline)}</p></div>
-    ${d.notes?`<div class="sect"><h3>Watch out for</h3><p class="warn">${esc(d.notes)}</p></div>`:""}
+    ${d.notes?`<div class="sect"><h3>Before you enter</h3><p class="warn">${esc(d.notes)}</p></div>`:""}
     <dl class="facts">
       <div class="fact"><dt>Team or individual</dt><dd>${esc(d.team_or_individual)}${(d.team_size_max&&d.team_size_min!==d.team_size_max)?" ("+esc(d.team_size_min)+"&ndash;"+esc(d.team_size_max)+")":""}</dd></div>
       <div class="fact"><dt>Grades</dt><dd>${esc(d.grade_min)}&ndash;${esc(d.grade_max)}</dd></div>
@@ -306,7 +306,7 @@ function item(d){
       ${d.advisor_required==="TRUE"?`<div class="fact"><dt>Advisor required</dt><dd>Yes</dd></div>`:""}
       <div class="fact"><dt>Who registers</dt><dd>${esc(d.registration_owner)}</dd></div>
       <div class="fact"><dt>Time commitment</dt><dd>${esc(d.time_commitment)}</dd></div>
-      ${d.last_checked?`<div class="fact"><dt>Last checked</dt><dd>${esc(d.last_checked)}</dd></div>`:""}
+      ${(d.last_checked&&d.last_checked!=="Never")?`<div class="fact"><dt>Last checked</dt><dd>${esc(d.last_checked)}</dd></div>`:""}
     </dl>
     <div class="official">
       <p class="official-label">Official site: <b>${esc(d.source_url)}</b></p>
