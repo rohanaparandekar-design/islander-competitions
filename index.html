@@ -73,6 +73,20 @@ h1.pagehead{font-weight:700}
 .callout-link{font:inherit;color:var(--maroon);font-weight:600;text-decoration:underline;
   text-underline-offset:2px;background:none;border:0;padding:0;cursor:pointer}
 
+.signup{max-width:64ch;margin:0 auto 44px;border:1px solid var(--maroon);padding:26px 28px;text-align:center}
+.signup-h{font-family:var(--font-title);font-size:20px;font-weight:700;margin:0 0 6px;color:var(--ink)}
+.signup-sub{font-size:13.5px;color:var(--ink);margin:0 0 18px}
+.signup-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.signup-input{flex:1 1 240px;max-width:320px;border:1px solid var(--rule);background:var(--bg);
+  padding:11px 12px;font:inherit;font-size:13.5px;color:var(--ink)}
+.signup-input:focus{outline:2px solid var(--maroon);outline-offset:2px}
+.signup-btn{background:var(--maroon);border:1px solid var(--maroon);color:#fff;
+  padding:11px 24px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;
+  transition:background .18s,border-color .18s}
+.signup-btn:hover{background:var(--maroon-lt);border-color:var(--maroon-lt)}
+.signup-msg{margin:12px 0 0;font-size:12px;letter-spacing:.04em;color:var(--now)}
+.signup-thanks{font-size:14px;color:var(--later);margin:8px 0 0;font-weight:600}
+
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(228px,1fr));gap:22px}
 .ccard{border:1px solid var(--maroon);padding:30px 24px 26px;text-align:left;
   transition:border-color .2s,transform .2s;display:flex;flex-direction:column;min-height:196px;background:var(--bg)}
@@ -143,6 +157,11 @@ h1.pagehead{font-weight:700}
   padding:14px 30px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;
   text-decoration:none;margin:22px 0 0;transition:background .18s,border-color .18s}
 .cta-btn:hover{background:var(--maroon-lt);border-color:var(--maroon-lt);color:#fff}
+.share-btn{display:inline-block;border:1px solid var(--maroon);color:var(--maroon);
+  padding:14px 26px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;
+  margin:22px 0 0 10px;vertical-align:top;transition:background .18s,color .18s}
+.share-btn:hover{background:var(--maroon);color:#fff}
+.share-btn[disabled]{cursor:default;opacity:1}
 
 .side{text-align:center;margin-bottom:44px}
 .side-h{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink);font-weight:600;
@@ -160,6 +179,22 @@ h1.pagehead{font-weight:700}
 .empty{padding:70px 0;text-align:center;color:var(--ink)}
 footer{margin-top:80px;border-top:1px solid var(--rule);padding:34px 0 60px;text-align:center;
   font-size:10.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--ink);line-height:2.2}
+.foot-link{color:var(--maroon);font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.foot-link:hover{color:var(--maroon);text-decoration-thickness:2px}
+.foot-cta{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 11px;margin-top:14px}
+.foot-sep{opacity:.35}
+.foot-signup{display:inline-flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:7px}
+.foot-signup-input{border:1px solid var(--rule);background:var(--bg);padding:6px 8px;font:inherit;
+  font-size:11px;letter-spacing:.04em;text-transform:none;color:var(--ink);width:146px}
+.foot-signup-input:focus{outline:2px solid var(--maroon);outline-offset:2px}
+.foot-signup-btn{border:1px solid var(--maroon);color:var(--maroon);padding:6px 12px;font-size:10px;
+  letter-spacing:.12em;text-transform:uppercase;font-weight:600;transition:background .18s,color .18s}
+.foot-signup-btn:hover{background:var(--maroon);color:#fff}
+.foot-signup-msg{width:100%;color:var(--now);text-transform:none;letter-spacing:.03em;font-size:10.5px}
+.foot-share{color:var(--maroon);font-weight:600;text-decoration:underline;text-underline-offset:3px;
+  letter-spacing:.15em;text-transform:uppercase;font-size:10.5px}
+.foot-share:hover{text-decoration-thickness:2px}
+.foot-share[disabled]{cursor:default;opacity:1}
 
 @media (max-width:900px){
   .layout{grid-template-columns:1fr;gap:56px}
@@ -170,6 +205,8 @@ footer{margin-top:80px;border-top:1px solid var(--rule);padding:34px 0 60px;text
   .shell{padding:0 20px}
   .row{grid-template-columns:60px 1fr;gap:0 15px}
   .cards{grid-template-columns:1fr}
+  .foot-cta{flex-direction:column;gap:12px}
+  .foot-sep{display:none}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
@@ -214,6 +251,18 @@ footer{margin-top:80px;border-top:1px solid var(--rule);padding:34px 0 60px;text
   </div>
   <footer>
     Student Competition Resources &nbsp;&middot;&nbsp; 2026&ndash;2027 &nbsp;&middot;&nbsp; 40 Competitions On File
+    <div class="foot-cta">
+      <span>Missing a competition? <a class="foot-link" href="https://forms.gle/n676c9ysFu3fn17L6" target="_blank" rel="noopener">Submit one &rarr;</a></span>
+      <span class="foot-sep">&middot;</span>
+      <form class="foot-signup" data-signup novalidate>
+        <span>Get deadline reminders &rarr;</span>
+        <input type="email" name="email" class="foot-signup-input" placeholder="you@school.edu" aria-label="Email address" required>
+        <button type="submit" class="foot-signup-btn">Notify me</button>
+        <span class="foot-signup-msg" data-signup-msg hidden></span>
+      </form>
+      <span class="foot-sep">&middot;</span>
+      <button type="button" class="foot-share">Share this with a student who needs it</button>
+    </div>
   </footer>
 </div>
 
@@ -339,6 +388,15 @@ function home(){
     <h1 class="pagehead">Student Competition Resources 2026&ndash;2027</h1>
     <p class="intro">Pick a category to see everything inside it, or use the menu above. Each competition lists what it is, what you have to do, when it closes, what it costs, and who has to register you.</p>
     ${callout}
+    <form class="signup" data-signup novalidate>
+      <p class="signup-h">Get deadline reminders</p>
+      <p class="signup-sub">New competitions and closing dates, straight to your inbox.</p>
+      <div class="signup-row">
+        <input type="email" name="email" class="signup-input" placeholder="you@school.edu" aria-label="Email address" required>
+        <button type="submit" class="signup-btn">Notify me</button>
+      </div>
+      <p class="signup-msg" data-signup-msg hidden></p>
+    </form>
     <div class="cards">${cards}</div>`;
 }
 function item(d){
@@ -350,6 +408,7 @@ function item(d){
       ${d.start_by_date?`<p class="rwhen">Start by: ${esc(d.start_by_date)}</p>`:""}
       <p class="rwhen">${esc(d.deadline_display)}</p>
       <a class="cta-btn" href="${esc(d.source_url)}" target="_blank" rel="noopener">Go to the official site &rarr;</a>
+      <button type="button" class="share-btn" data-share="${d.i}">Share</button>
       <div class="pills">${pills(d)}</div>
       <div class="spans"><b>Spans these areas</b>
         ${d.spans.map(s=>`<span class="pill cat">${esc(s)}</span>`).join(" ")}</div>
@@ -375,6 +434,93 @@ function item(d){
   </article>`;
 }
 function byDeadline(a,b){ if(a.days===null)return 1; if(b.days===null)return -1; return a.days-b.days; }
+
+const SIGNUP_ACTION="https://docs.google.com/forms/d/e/1FAIpQLSc_seBl0XT0dztFr6P1a5IAyxlk5PZddWdXz11ZuvTgpO9rfw/formResponse";
+const SIGNUP_ENTRY="entry.1378241001";
+const EMAIL_RE=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+function signupSend(email){
+  try{
+    let ifr=document.getElementById("ic-signup-sink");
+    if(!ifr){
+      ifr=document.createElement("iframe");
+      ifr.id="ic-signup-sink"; ifr.name="ic-signup-sink";
+      ifr.style.display="none"; ifr.setAttribute("aria-hidden","true"); ifr.tabIndex=-1;
+      document.body.appendChild(ifr);
+    }
+    const f=document.createElement("form");
+    f.action=SIGNUP_ACTION; f.method="POST"; f.target="ic-signup-sink"; f.style.display="none";
+    const inp=document.createElement("input");
+    inp.type="hidden"; inp.name=SIGNUP_ENTRY; inp.value=email;
+    f.appendChild(inp); document.body.appendChild(f);
+    f.submit();
+    setTimeout(()=>{ try{ f.remove(); }catch(e){} },1500);
+  }catch(e){
+    try{ fetch(SIGNUP_ACTION,{method:"POST",mode:"no-cors",body:new URLSearchParams({[SIGNUP_ENTRY]:email})}); }catch(_){}
+  }
+}
+document.addEventListener("submit",e=>{
+  const form=e.target.closest("form[data-signup]");
+  if(!form) return;
+  e.preventDefault();
+  const input=form.querySelector('input[type="email"]');
+  const msg=form.querySelector("[data-signup-msg]");
+  const email=(input&&input.value||"").trim();
+  if(!EMAIL_RE.test(email)){
+    if(msg){ msg.textContent="Enter a valid email"; msg.hidden=false; }
+    if(input) input.focus();
+    return;
+  }
+  signupSend(email);
+  if(input) input.value="";
+  const foot=form.classList.contains("foot-signup");
+  form.innerHTML=foot
+    ? "Thanks &mdash; you're on the list ✓"
+    : `<p class="signup-h">Get deadline reminders</p><p class="signup-thanks">Thanks &mdash; you're on the list ✓</p>`;
+});
+
+function shareFlash(btn){
+  if(!btn) return;
+  const orig=btn.dataset.label||btn.textContent;
+  btn.dataset.label=orig;
+  btn.textContent="Link copied ✓";
+  btn.disabled=true;
+  setTimeout(()=>{ btn.textContent=orig; btn.disabled=false; },1800);
+}
+function shareCopy(text,cb){
+  const ok=()=>{ cb&&cb(); };
+  try{
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(text).then(ok,()=>shareCopyLegacy(text,ok));
+      return;
+    }
+  }catch(e){}
+  shareCopyLegacy(text,ok);
+}
+function shareCopyLegacy(text,cb){
+  try{
+    const ta=document.createElement("textarea");
+    ta.value=text; ta.setAttribute("readonly",""); ta.style.position="fixed"; ta.style.opacity="0";
+    document.body.appendChild(ta); ta.select();
+    document.execCommand("copy");
+    document.body.removeChild(ta);
+  }catch(e){}
+  cb&&cb();
+}
+function doShare(data,btn){
+  try{
+    if(navigator.share){ navigator.share(data).catch(()=>{}); return; }
+  }catch(e){}
+  shareCopy(data.url,()=>shareFlash(btn));
+}
+function shareComp(d,btn){
+  if(!d) return;
+  const url=location.origin+location.pathname;
+  doShare({title:d.name,text:d.name+" — Islander Competitions",url},btn);
+}
+function shareSite(btn){
+  const url=location.origin+location.pathname;
+  doShare({title:"Islander Competitions",text:"Every academic competition in one place — Islander Competitions",url},btn);
+}
 
 function render(){
   document.querySelectorAll("#nav button").forEach(b=>{
@@ -403,6 +549,10 @@ function render(){
 }
 
 document.addEventListener("click",e=>{
+  const sh=e.target.closest(".share-btn[data-share]");
+  if(sh){ shareComp(DATA[+sh.dataset.share],sh); return; }
+  const fsh=e.target.closest(".foot-share");
+  if(fsh){ shareSite(fsh); return; }
   const o=e.target.closest("[data-open]");
   if(o){ view={type:"item",i:+o.dataset.open}; go(); return; }
   const c=e.target.closest(".ccard");
