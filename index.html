@@ -98,12 +98,12 @@ h1.pagehead{font-weight:700}
 .grid-h{text-align:center;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);
   font-weight:600;margin:0 0 20px}
 .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:22px}
-.ccard{border:1px solid var(--rule);border-left:4px solid var(--ax,var(--maroon));padding:24px 22px 22px;
+.ccard{border:1px solid var(--rule);border-left:4px solid var(--ax,var(--maroon));padding:26px 24px 24px;
   text-align:left;transition:border-color .2s,transform .2s;display:flex;flex-direction:column;
-  min-height:170px;background:var(--bg)}
+  min-height:196px;background:var(--bg)}
 .ccard:hover{transform:translateY(-3px)}
-.ccard .cname{font-family:var(--font-title);font-size:21px;line-height:1.25;margin:0 0 10px;font-weight:700}
-.ccard .cnext{font-size:12.5px;color:var(--ink);margin:0 0 12px}
+.ccard .cname{font-family:var(--font-title);font-size:27px;line-height:1.2;margin:0 0 12px;font-weight:700}
+.ccard .cnext{font-size:14.5px;color:var(--ink);margin:0 0 14px}
 .ccard .cnext b{color:var(--ax,var(--maroon))}
 .ccard .cmeta{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);
   font-weight:500;margin-top:auto;opacity:.7}
@@ -269,7 +269,7 @@ footer{margin-top:80px;border-top:1px solid var(--rule);padding:32px 0 60px;text
       <div class="side">
         <p class="side-h">About</p>
         <img class="logo" src="logo.jpg" alt="Islander Comps logo">
-        <p>Every academic competition we can find, in one place. Built by students on the WA East Side, for students.</p>
+        <p>Every academic competition we can find, in one place. Built by high schoolers, for high schoolers.</p>
       </div>
       <div class="side">
         <p class="side-h">Closing Soon</p>
@@ -278,7 +278,7 @@ footer{margin-top:80px;border-top:1px solid var(--rule);padding:32px 0 60px;text
     </aside>
   </div>
   <footer>
-    <p class="foot-confident">Deadlines are updated weekly. Always confirm on the official competition page before you plan &mdash; every listing links to its source.</p>
+    <p class="foot-confident">Deadlines are updated weekly. Always confirm on the official competition page before you plan. Every listing links to its source.</p>
     <div id="foot-signup" class="foot-signup-wrap"></div>
     <div class="foot-meta">
       Student Competition Resources &nbsp;&middot;&nbsp; 2026&ndash;2027
@@ -294,7 +294,7 @@ footer{margin-top:80px;border-top:1px solid var(--rule);padding:32px 0 60px;text
 <script>
 /* ============ CONFIG (owner: set these) ============ */
 const DATA_URL      = "competitions.json";
-const FORM_ENDPOINT = "https://REPLACE-ME.example.com/subscribe"; // Formspree/Buttondown endpoint; must return 2xx on success
+const FORM_ENDPOINT = "https://formspree.io/f/mwlkkkgy"; // Formspree endpoint; must return 2xx on success
 const SUBMIT_FORM_URL = "https://forms.gle/n676c9ysFu3fn17L6";
 /* ================================================== */
 
@@ -542,7 +542,7 @@ function home(){
     const set = DATA.filter(d => d.interest===c);
     const nxt = nearestDeadline(c);
     const line = nxt
-      ? `Next firm deadline: <b>${esc(fmtDate(nxt.deadline))}</b> (${nxt.days}d)`
+      ? `Next deadline: <b>${esc(fmtDate(nxt.deadline))}</b> (${nxt.days}d)`
       : `<b>Multiple deadlines</b> &mdash; see inside`;
     return `<button class="ccard ${IX[c]||""}" data-int="${esc(c)}">
       <h3 class="cname">${esc(c)}</h3>
@@ -552,8 +552,8 @@ function home(){
   }).join("");
   const beginner = DATA.find(d => d.id==="nyt-contests");
   const callout = beginner ? `<p class="callout">New to competitions? Start with the
-      <button class="callout-link" data-open="${beginner.i}">NYT Tiny Memoir</button>
-      &mdash; 100 words, free, no teacher needed.</p>` : "";
+      <button class="callout-link" data-open="${beginner.i}">NYT Tiny Memoir</button>:
+      100 words, free, no teacher needed.</p>` : "";
   const todayStr = TODAY.toLocaleDateString("en-US",{month:"long",day:"numeric",year:"numeric"});
   const urgent = DATA.filter(d => d.days!==null && d.days>=0 && d.days<=90).length;
   return `<p class="eyebrow">${esc(todayStr)} <span class="sep">/</span> <em>${DATA.length} competitions</em>
